@@ -7,7 +7,7 @@
     "jade": ">= 0.0.1",
     "stylus": ">= 0.0.1",
     "nib": ">= 0.0.1",
-    "socket.io": ">= 0.0.1",
+    "socket.io": ">= 0.0.2",
     "connect"  : "1.8.7",
     "mongoose" : "2.6.7",
     "everyauth" : "0.2.32"
