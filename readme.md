@@ -1,11 +1,6 @@
-# NodeJS Party 9 - SocketIO Demo
+# Ossii Chat - SocketIO Demo
 
-This project is created as a demo for NodeJS Party 9 at Taipei, Taiwan. 
-
-Do check out the project demo at http://nodejstw-socketio.jit.su/
-
-Demo created by Grey Ang. If you have any questions, feel free to find me on [Facebook](www.fb.com/conancat) or [Twitter](www.twitter.com/conancat)!
-
+This project is created Ossii chatroom
 
 ## NodeJS Modules: 
 
