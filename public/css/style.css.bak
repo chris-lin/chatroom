@@ -1,0 +1,23 @@
+body{padding:50px}
+a{color:#195073}
+h1{text-align:center;font-size:2em}
+.hd{width:95%;margin:0 auto;}
+.hd .l,.hd .r{display:inline-block;width:50%}
+.hd .l{text-align:left}
+.hd .r{text-align:right}
+.chatroomName{padding:10.5px;border:1px solid #000}
+.chatBox{border:1px solid #000}
+.memberBox{border:1px solid #000}
+.messagesBox{border:1px solid #000}
+.chat{width:95%;margin:0 auto;border:1px solid #eee}
+.chat-bd{height:400px;overflow-y:auto}
+.chat-msgs{padding:21px}
+.chat-msg-time{color:#aaa;margin-right:8.4px}
+.chat-msg-user{font-weight:bold;margin-right:8.4px;color:#195073}
+.chat-system-msg{color:#7f8c1f}
+.chat-ft{padding:10.5px}
+.chat-form{overflow:hidden}
+.chat-input-wrapper{overflow:hidden;padding:10.5px;border:1px solid #eee}
+.chat-input{font-size:21px;width:100%;margin:0;padding:0;border:none;}
+.chat-input:focus{outline:none;-webkit-box-shadow:0;box-shadow:0}
+.chat-submit{font-size:20px;float:right;margin-left:10.5px;padding:10.5px;border:none;color:#fff}

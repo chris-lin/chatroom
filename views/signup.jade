@@ -1,0 +1,14 @@
+h1#page-title 帳號註冊
+
+if typeof(errors) !== 'undefined'
+  center 
+    #{errors}
+
+#list
+  form(action='/signup', method='post', accept-charset='utf-8')
+    .item-new 帳號
+      input.input(type='text', name='login')
+    .item-new 密碼
+      input.input(type='password', name='password')
+    .item-new
+      input.btn.btn-success.input(type='submit', value='註冊')

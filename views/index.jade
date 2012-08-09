@@ -1,0 +1,66 @@
+if everyauth.loggedIn
+  .navbar.navbar-fixed-top
+    .navbar-inner
+      .container-fluid
+        button.btn.btn-navbar
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        .btn-group.pull-right
+          a.btn.dropdown-toggle(href='#', data-toggle='dropdown')
+            i.icon-user
+            span#userName #{user.name || user.id}
+            span.caret
+          ul.dropdown-menu
+            li
+              a(href='#') 帳號資料
+            li.divider
+            li
+              a(href='/logout') 登出
+        .nav-collapse
+          ul.nav
+            li
+              a(href='http://www.ossii.com.tw') 公司官網
+            li
+              a(href='http://ossii.com.tw') 信箱  
+            li
+              a(href='http://192.168.1.51/ossiieip') Eip
+            li.active
+              a(href='#') 聊天室  
+              
+  .container-fluid(style='position: relative; border: 1px solid;')
+    .row-fluid
+      .span12.chatroomName
+        h1 #{title}
+    .row-fluid
+      .span10.chatBox
+        .chat
+          .chat-bd
+            .chat-msgs
+      .span2.chat-usersBox
+        .hd
+          .c
+            p.online-users
+        .well.sidebar-nav
+          ul.nav.nav-list.chat-usersList
+    .row-fluid
+      .span12.messagesBox
+        .chat-ft
+            form.chat-form
+              input.chat-submit(type="submit", value="送出").btn.btn-primary
+              .chat-input-wrapper
+                input.chat-input(type="text", placeholder="輸入訊息")
+else
+  div
+    center
+      br
+      h2 歡迎來到晟鑫大家族.
+      h2 你尚未登入帳號喔.
+      br
+      a.btn.btn-info(href='/login', style='margin:10px; padding:10px; font-size:26px;') 登入
+      a.btn.btn-info(href='/signup', style='margin:10px; padding:10px; font-size:26px;') 註冊
+
+
+
+
+      
