@@ -1,6 +1,7 @@
-# Ossii Chat - SocketIO Demo
+# Ossii chatroom Demo
 
-This project is created Ossii chatroom
+Ossii chatroom
+
 
 ## NodeJS Modules: 
 
