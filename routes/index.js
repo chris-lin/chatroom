@@ -13,10 +13,12 @@ exports.index = function ( req, res, next ){
   console.log(req.url)
   console.log(req.loggedIn)
 	
-  res.render( 'index', {
-	  title : 'OSSII chat Demo',
-	  todos : []
-  });
+  res.sendfile();
+  
+  //~ res.render( 'index', {
+	  //~ title : 'OSSII chat Demo',
+	  //~ todos : []
+  //~ });
 
   //~ Todo.
     //~ //find({ user_id : req.cookies.user_id }).

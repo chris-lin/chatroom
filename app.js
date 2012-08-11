@@ -31,7 +31,7 @@ var compile = function (str, path) {
 // Configuration
 app.configure(function(){
   app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
+  app.set('view engine', 'ejs');
   app.use(express.favicon());
   app.use(express.logger());
   app.use(express.cookieParser());

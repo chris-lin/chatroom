@@ -1,24 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/screen.css' />
-    <!--[if lt IE 9]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel='stylesheet' href='/lib/bootstrap/css/bootstrap.css' />
+    <link rel='stylesheet' href='/css/style.css' />
+    <script src="/socket.io/socket.io.js" type="text/javascript"></script>
+    <script src="/js/moment.min.js" type="text/javascript"></script>
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/lib/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <script src="/js/script.js" type="text/javascript"></script>
   </head>
   <body>
-    <div id="layout">
-      <%- body %>
-      <div id="layout-footer"></div>
-    </div>
-    <div id="footer-wrap">
-      <div id="footer">
-        <div class="footer-content"><a id="github-link" href="https://github.com/dreamerslab/express-todo-example" target="_blank">Code</a> by</div>
-        <a href="http://dreamerslab.com/" id="dreamerslab" target="_blank">DreamersLab</a>
-        <div class="footer-content">&#169;</div>
-      </div>
-    </div>
-    <script src="/javascripts/ga.js"></script>
+    <%- body %>
   </body>
 </html>
