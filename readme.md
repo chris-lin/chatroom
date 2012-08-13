@@ -1,4 +1,4 @@
-# Ossii chatroom Demo
+# Ossii chatroom 
 
 Ossii chatroom
 
@@ -7,7 +7,7 @@ Ossii chatroom
 
 * [Express](https://github.com/visionmedia/express)
 * [Socket.io](https://github.com/learnboost/socket.io)
-* [Jade](https://github.com/visionmedia/jade)
+* [Ejs](https://github.com/visionmedia/ejs)
 * [Stylus](https://github.com/learnboost/stylus)
 * [Nib](https://github.com/visionmedia/nib)
 
