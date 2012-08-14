@@ -6,9 +6,11 @@ body {
     margin:0 auto;
     max-width: 350px;
     text-align: center;
+    font-family: sans-serif;
+    font-size: 1em;
 }
 
-.login-block > #register-btn{
+.login-block > a{
     color: #fff;
 }
 
@@ -16,12 +18,12 @@ body {
     text-align: center;
 }
 
-.login-form > .title {
+.login-form > .form-title {
     width: 230px;
     margin:5px auto;
     font-size: 1.5em;
     line-height:1.5;
-    font-family: open Hei;
+    
     text-align: center;
 }
 
