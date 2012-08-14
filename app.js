@@ -1,17 +1,17 @@
 /**
  * Module dependencies.
  */
- 
+
 var express = require('express')
-  , stylus = require('stylus')
+//  , stylus = require('stylus')
   , nib = require('nib')
   , everyauth = require('everyauth');
 
 var app = module.exports = express.createServer();
 
 // mongoose setup
-require( './db' );  
-  
+require( './db' );
+
 // autoentication setup
 var auth = require( './auth' );
 
@@ -20,6 +20,7 @@ everyauth.helpExpress( app );
 
 var routes = require('./routes')
 
+/*
 // Stylus compile function
 var compile = function (str, path) {
   return stylus(str)
@@ -27,6 +28,7 @@ var compile = function (str, path) {
     .set('compress', true)
     .use(nib());
 };
+*/
 
 // Configuration
 app.configure(function(){
@@ -40,33 +42,35 @@ app.configure(function(){
   app.use(express.session({secret: 'nodeTWParty'}) );
   app.use(everyauth.middleware() );
   app.use(app.router);
-  
-  // Insert Stylus middleware before creating static with Express  
+  // 必須要放在stylus下面 stylus才會有效
+  app.use(express.static(__dirname + '/public'));
+  /*
+  // Insert Stylus middleware before creating static with Express
   app.use(stylus.middleware({
     src: __dirname + '/src/public'
     , dest: __dirname + '/public'
     , compile: compile
   }));
-  
-  // 必須要放在stylus下面 stylus才會有效
-  app.use(express.static(__dirname + '/public'));
+  */
 });
 
 
 // Routes
 
 app.get('/', routes.index);
+app.get('/create', routes.create );
+/*
 app.post( '/create', auth.requireLogin, routes.create );
 app.get( '/destroy/:id', auth.requireLogin, routes.destroy );
 app.get( '/edit/:id', auth.requireLogin, routes.edit );
 app.post( '/update/:id', auth.requireLogin, routes.update );
-
+*/
 
 app.listen(3000, function(){
-  
+
   // Start SocketIO after app is initialized
   app.sockets = require('./socket')(app);
-  
-  
+
+
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });

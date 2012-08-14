@@ -9,9 +9,9 @@ everyauth.everymodule.findUserById( function (userId, callback) {
   });
 
 everyauth.password
-  .getLoginPath('/login') // Login page url
-  .postLoginPath('/login') // Url that your login form POSTs to
-  .loginView('login')
+  .getLoginPath('/') // Login page url
+  .postLoginPath('/') // Url that your login form POSTs to
+  .loginView('index')
   .authenticate( function (login, password) {
     var promise = this.Promise();
     User.
@@ -28,9 +28,9 @@ everyauth.password
     return promise;
   })
   .loginSuccessRedirect('/') // Where to redirect to after login
-  .getRegisterPath('/signup') // Registration url
-  .postRegisterPath('/signup') // Url that your registration form POSTs to
-  .registerView('signup')
+  .getRegisterPath('/create') // Registration url
+  .postRegisterPath('/create') // Url that your registration form POSTs to
+  .registerView('create')
   .validateRegistration( function (newUser) {
     if (!newUser.login || !newUser.password) {
       return ['Either ID or Password is missing.'];
