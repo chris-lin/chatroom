@@ -7,6 +7,17 @@ var Todo = new Schema({
     updated_at : Date
 });
 
+var Groups = new Schema({
+    id : String,
+    groupsname : String
+    });
+
+var Message = new Schema({
+            time : Date,
+            info : String,
+            user_id: String
+            });
+
 var User = new Schema({
     id    : { type : String, unique : true },
     name  : String,
@@ -16,5 +27,7 @@ var User = new Schema({
 
 mongoose.model( 'Todo', Todo );
 mongoose.model( 'User', User );
+mongoose.model( 'Groups', Groups );
+mongoose.model( 'Message', Message );
 
 mongoose.connect( 'mongodb://localhost/ossii-chat' );

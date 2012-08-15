@@ -1,20 +1,35 @@
+var everyauth = require('everyauth');
+var mongoose = require( 'mongoose' );
+var User     = mongoose.model( 'User');
+var Message    = mongoose.model( 'Message');
+
 module.exports = function(app) {
   var io = require('socket.io').listen(app);
-    
   io.configure(function(){
     io.set('log level', 2)
   });
   
-  // Messages buffer
-  var buffer = [];
-  var users = [];
-  
-  var pushBuffer = function(data) {
+    // Messages buffer
+    var buffer = [];
+    var users = [];
+    //Inert ingo MongoDB
+    var pushBuffer = function(data) {
+    new Message(data).save({},);
+            //Message(data).update({date:data.Date_info},{$push :{msg:data.msg}})
+            /*User.update({$push:{msg:data}},function(err){
+                if(err){
+                    console.log(err);
+                    }
+                else{
+                    console("update success");
+                    }
+                });//*/
+      //  console.log(data);
     buffer.push(data);
     
     if (buffer.length > 50) {
       buffer.unshift();
-    }
+    }//*/
   }
   
   // Count how many sockets are connected
@@ -74,9 +89,7 @@ module.exports = function(app) {
           // Emit system message that user joins the chat
           io.sockets.emit('system', data);
           io.sockets.emit('users', users);
-          
-          pushBuffer(data);
-         
+          //console.log(data);
           // Emit messages in buffer
           for (i in buffer) {
             if (buffer[i].system) socket.emit('system', buffer[i]);
@@ -93,7 +106,6 @@ module.exports = function(app) {
     // When user leaves
     socket.on('disconnect', function(){
       socket.get('username', function(err, username) {
-        console.log("username username username = "+username)
         if (!username) return false;
         
         removeUsers(username);
@@ -110,7 +122,7 @@ module.exports = function(app) {
         socket.broadcast.emit('system', data);
         socket.broadcast.emit('users', users);
         
-        pushBuffer(data);
+        //pushBuffer(data);
         
       })
       
@@ -118,27 +130,30 @@ module.exports = function(app) {
     
     // When user gets message
     socket.on('msg', function(msg){
-      
+            
       // Add in check if message isn't empty
       if (msg && msg.length < 1) return false;      
-      
-      console.log("users = "+users)
+         console.log(msg);
+      //console.log("users = "+users)
       
       // Get username first
-      socket.get('username', function(err, username) {
-        console.log("username username = "+username)
-        var data = {
-          username: username
-          , time: new Date()
-          , msg: msg
-        }
-        
-        // Broadcast the data
-        socket.broadcast.emit('msg', data);
-        
-        pushBuffer(data);
-        
-      });
+    socket.get('username', function(err, username) {
+        console.log("username username = "+username);  
+        User.find({"id":username.trim()}).run( function (err, docs) {
+           // console.log(docs);
+            now = new Date();
+            date=now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate();
+            time=now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+            var data = {
+                        username: username
+                        , time: new Date()
+                        , msg: msg
+                        }
+                // Broadcast the data
+            socket.broadcast.emit('msg', data);
+            pushBuffer(data);
+            });//*/  
+        });
       
     });
 
