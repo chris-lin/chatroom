@@ -7,8 +7,7 @@ Ossii chatroom
 
 * [Express](https://github.com/visionmedia/express)
 * [Socket.io](https://github.com/learnboost/socket.io)
-* [Jade](https://github.com/visionmedia/jade)
-* [Stylus](https://github.com/learnboost/stylus)
+* [Ejs](https://github.com/visionmedia/ejs)
 * [Nib](https://github.com/visionmedia/nib)
 
 ## Frontend stuffs:
