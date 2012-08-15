@@ -9,13 +9,11 @@ var utils    = require( 'connect' ).utils;
 var everyauth= require( 'everyauth' );
 
 exports.index = function ( req, res, next ){
-  console.log("hhhh")
-  console.log(req.url)
-  console.log(req.loggedIn)
-	
+
+  //res.sendfile();
+
   res.render( 'index', {
-	  title : 'OSSII chat Demo',
-	  todos : []
+    title : 'OSSII chat Demo'
   });
 
   //~ Todo.
@@ -24,7 +22,7 @@ exports.index = function ( req, res, next ){
     //~ sort( 'updated_at', -1 ).
     //~ run( function ( err, todos ){
       //~ if( err ) return next( err );
-//~ 
+//~
       //~ res.render( 'index', {
           //~ title : 'Express Todo Example',
           //~ todos : todos
@@ -32,6 +30,14 @@ exports.index = function ( req, res, next ){
     //~ });
 };
 
+exports.create = function ( req, res, next ){
+    console.log("abcdefghijklmnopqrstuvwxyz")
+    res.render( 'create', {
+        title : 'OSSII Chat - Create',
+    });
+};
+
+/*
 exports.create = function ( req, res, next ){
 	console.log("abcdefghijklmnopqrstuvwxyz")
   new Todo({
@@ -93,6 +99,8 @@ exports.update = function( req, res, next ){
     });
   });
 };
+*/
+
 
 //exports.current_user = function ( req, res, next ){
 //  if( !req.cookies.user_id ){
