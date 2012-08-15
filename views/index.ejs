@@ -11,7 +11,7 @@
       <div class="btn-group pull-right">
         <a class="btn dropdown-toggle" href="#" data-toggle="dropdown">
           <i class="icon-user"></i>
-          <span id="userName"> <%= user.name || user.id %> </span>
+          <span id="userName"><%= user.name || user.id %></span>
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
@@ -25,31 +25,14 @@
         </ul>
       </div>
       <div class="nav-collapse">
-        <ul class="nav">
-          <li>
-            <a href="http://www.ossii.com.tw">公司官網</a>
-          </li>
-          <li>
-            <a href="http://ossii.com.tw">信箱</a>
-          </li>
-          <li>
-            <a href="http://192.168.1.51/ossiieip">Eip</a>
-          </li>
-          <li class="active">
-            <a href="#">聊天室</a>
-          </li>
-        </ul>
+        <h1> <%= title %> </h1>
       </div>
     </div>
   </div>
 </div>
 
-<div class="container-fluid" style="position:relative;border:1px solid;">
-  <div class="row-fluid">
-    <div class="span12 chatroomName">
-      <h1> <%= title %> </h1>
-    </div>
-  </div>
+<div class="container-fluid">
+
   <div class="row-fluid">
     <div class="span10">
       <div class="row-fluid">
@@ -76,11 +59,9 @@
     </div>
     <div class="span2 chat-usersBox">
       <div class="chat-users">
-        <div class="hd">
           <div class="c">
             <p class="online-users"></p>
           </div>
-        </div>
         <div class="well sidebar-nav">
           <ul class="nav nav-list chat-usersList"></ul>
         </div>

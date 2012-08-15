@@ -50,7 +50,7 @@ everyauth.password
     return promise;
   })
   .registerSuccessRedirect('/') // Url to redirect to after a successful registration
-  .loginLocals( {title: 'Login'})
+  .loginLocals( {title: 'OSSII chat Demo'})
   .registerLocals( {title: 'Login'});
 
 var everyauth = require('everyauth')

@@ -13,8 +13,7 @@ exports.index = function ( req, res, next ){
   //res.sendfile();
 
   res.render( 'index', {
-    title : 'OSSII chat Demo',
-    todos : []
+    title : 'OSSII chat Demo'
   });
 
   //~ Todo.
