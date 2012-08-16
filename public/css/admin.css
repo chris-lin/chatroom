@@ -1,0 +1,32 @@
+
+.admin-block {
+    background-color: #FFFFFF;
+    /border:1px solid #ff0000;
+    /border-radius: 10px 10px 0 0;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    right: 0;
+    bottom: 0;
+    
+}
+
+.admin-block > .dashboard {
+    //width:250px;
+    //height:100%;
+    /background-color: #404040;
+}
+.admin-block > .dashboard ul,li{
+    //padding: 0;
+    //margin: 0;
+}
+
+.admin-ul > li{
+    height:64px;
+    line-height:64px;
+    border-bottom: 1px solid #BFBFBF;
+}
+.admin-pagination li{
+    height:20px;
+    overflow:hidden;
+}

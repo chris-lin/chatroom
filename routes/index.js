@@ -31,15 +31,22 @@ exports.index = function ( req, res, next ){
 };
 
 exports.create = function ( req, res, next ){
-    console.log("abcdefghijklmnopqrstuvwxyz")
     res.render( 'create', {
         title : 'OSSII Chat - Create',
     });
 };
 
+exports.admin = function ( req, res, next ){
+    console.log('route-admin');
+    res.render( 'admin', {
+        title : 'OSSII Chat - admin',
+    });
+};
+
+
 /*
 exports.create = function ( req, res, next ){
-	console.log("abcdefghijklmnopqrstuvwxyz")
+    console.log("abcdefghijklmnopqrstuvwxyz")
   new Todo({
       //user_id    : req.cookies.user_id,
       user_id    : req.user.id,

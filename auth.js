@@ -1,52 +1,50 @@
 var everyauth = require('everyauth');
 var mongoose = require( 'mongoose' );
-var User     = mongoose.model( 'User' );
+var chat_user = mongoose.model( 'chat_user' );
 
 everyauth.everymodule.findUserById( function (userId, callback) {
-    User.
+    chat_user.
       findOne({ id : userId }).
       run( callback );
-  });
+});
 
 everyauth.password
-  .getLoginPath('/') // Login page url
-  .postLoginPath('/') // Url that your login form POSTs to
-  .loginView('index')
-  .authenticate( function (login, password) {
-    var promise = this.Promise();
-    User.
-      findOne({ id : login , password : password }).
-      run( function ( err, user ){
-        if ( !user ) {
-          err = 'Invalid login';
+    .getLoginPath('/') // Login page url
+    .postLoginPath('/') // Url that your login form POSTs to
+    .loginView('index')
+    .authenticate( function (login, password) {
+        var promise = this.Promise();
+        chat_user.
+            findOne({ id : login , pwd : password }).
+            run( function ( err, user ){
+                if ( !user ) {
+                    err = 'Invalid login';
+                }
+                if( err ) return promise.fulfill( [ err ] );
+                promise.fulfill( user );
+            });
+        return promise;
+    })
+    .loginSuccessRedirect('/') // Where to redirect to after login
+    .getRegisterPath('/create') // Registration url
+    .postRegisterPath('/create') // Url that your registration form POSTs to
+    .registerView('create')
+    .validateRegistration( function (newUser) {
+        if (!newUser.login || !newUser.password) {
+            return ['Either ID or Password is missing.'];
         }
+        return null;
+    })
+    .registerUser( function (newUser) {
+        var promise = this.Promise();
+        new chat_user({
+            id : newUser.login,
+            pwd : newUser.password
+        }).save( function ( err, user, count ){
+          if( err ) return promise.fulfill( [ err ] );
 
-        if( err ) return promise.fulfill( [ err ] );
-
-        promise.fulfill( user );
-      });
-    return promise;
-  })
-  .loginSuccessRedirect('/') // Where to redirect to after login
-  .getRegisterPath('/create') // Registration url
-  .postRegisterPath('/create') // Url that your registration form POSTs to
-  .registerView('create')
-  .validateRegistration( function (newUser) {
-    if (!newUser.login || !newUser.password) {
-      return ['Either ID or Password is missing.'];
-    }
-    return null;
-  })
-  .registerUser( function (newUser) {
-	  var promise = this.Promise();
-    new User({
-        id : newUser.login,
-        password : newUser.password
-    }).save( function ( err, user, count ){
-      if( err ) return promise.fulfill( [ err ] );
-
-      promise.fulfill( user );
-    });
+          promise.fulfill( user );
+        });
     return promise;
   })
   .registerSuccessRedirect('/') // Url to redirect to after a successful registration
@@ -56,43 +54,18 @@ everyauth.password
 var everyauth = require('everyauth')
   , connect = require('connect');
 
-everyauth.facebook
-  .appId('731281890292714')
-  .appSecret('d09cea8ea49210e31a6ad58c4237aaef')
-  .handleAuthCallbackError( function (req, res) {
-    res.redirect('/');
-  })
-  .findOrCreateUser( function (session, accessToken, accessTokExtra, fbUserMetadata) {
-    var promise = this.Promise();
-    User.findOne({
-      id : fbUserMetadata.id
-    }).run( function( err, user ){
-      if( err ) return promise.fulfill( [ err ] );
-      if( user ) {
-        promise.fulfill( user );
-      } else {
-        new User({
-          id : fbUserMetadata.id,
-          name : fbUserMetadata.name,
-          profile : fbUserMetadata
-        }).save( function ( err, user, count ){
-          if( err ) return promise.fulfill( [ err ] );
-
-          promise.fulfill( user );
-        });
-      }
-    });
-    return promise;
-  })
-  .redirectPath('/');
-
-
-module.exports = {
-  requireLogin: function( req, res, next ) {
+module.exports.requireLogin = function( req, res, next ) {
+    console.log("myReq = " + req);
     if (!req.loggedIn) {
-      res.redirect( '/' );
-      return;
+        res.redirect( '/' );
+        return;
     }
     next();
-  }
+};
+module.exports.requireAdmin = function( req, res, next ) {
+    if ( req.user.id != 'admin' ) {
+        res.redirect( '/' );
+        return;
+    }
+    next();
 };
