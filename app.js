@@ -60,7 +60,7 @@ app.configure(function(){
 
 app.get('/', routes.index);
 app.get('/create', routes.create );
-app.get('/', routes.create );
+app.get('/del_user', admin.del_user );
 
 /*
 app.post( '/create', auth.requireLogin, routes.create );
