@@ -1,0 +1,149 @@
+@media (min-width: 980px) {
+  .title-bar-list{
+    display:none !important;
+  }
+}
+
+@media (max-width: 979px) {
+  .title-bar-btn{
+    display: none !important;
+  }
+  .title-bar-inner{
+    padding: 0 !important;
+  }
+  .chat-usersBox{
+    font-size: 14px !important;
+  }
+  .btn-top-tools{
+    float: left !important;
+  }
+
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  .title-bar-btn{
+    display: block !important;
+  }
+}
+
+.chatroomName{
+  padding:10.5px;
+  color:#fff;
+}
+
+/* chat msg box */
+
+.chat{
+
+  margin:0 auto;
+}
+
+.chat-bd{
+  height:400px;
+  overflow-y:auto;
+  background: whiteSmoke;
+  border:0px solid #fdc255;
+  -webkit-border-radius:6px 6px 6px 6px;
+  -moz-border-radius:6px 6px 6px 6px;
+  border-radius:6px 6px 6px 6px;
+}
+
+.chat-msgs{
+  padding:21px;
+}
+
+.chat-msg-time{
+  color:#aaa;
+  margin-right:8.4px;
+}
+
+.chat-msg-user{
+  font-weight:bold;
+  margin-right:8.4px;
+  color:#195073;
+}
+
+.chat-system-msg{
+  color:#7f8c1f;
+}
+
+/* messagesBox */
+
+.chat-ft{
+  padding:10px 3px;
+  height:40px;
+}
+
+.chat-form{
+  overflow:hidden;
+}
+
+.chat-input-wrapper{
+  overflow:hidden;
+  padding:6px 0px;
+}
+
+/*  .chat-input[type="text"] */
+.chat-input{
+  font-size:20px;
+  width:100%;
+  margin:0;
+}
+
+.chat-input:focus{
+  outline:none;
+  -webkit-box-shadow:0;
+  -moz-box-shadow:0;
+  box-shadow:0;
+}
+
+.chat-submit{
+  font-size:20px;
+  float:right;
+  margin-left:10px;
+  padding:10px 21px;
+  border:none;
+  color:#fff;
+}
+
+/* usersBox */
+
+.chat-users{
+  background: whiteSmoke;
+  height:450px;
+  overflow-y:auto;
+  border:0px solid #fdc255;
+  -webkit-border-radius:6px 6px 6px 6px;
+  -moz-border-radius:6px 6px 6px 6px;
+  border-radius:6px 6px 6px 6px;
+}
+
+.c{
+  width:95%;
+  margin: 0 auto;
+  padding: 10px 0;
+
+  color:#D51A1A;
+  text-align:center;
+
+}
+
+.c p{
+  border: 1px solid;
+}
+
+.sidebar-nav {
+  padding: 10px;
+}
+
+.chat-usersList{
+  list-style:disc;
+}
+
+.chat-usersList li{
+  line-height:26px;
+}
