@@ -12,6 +12,7 @@ exports.index = function ( req, res, next ){
     title : 'OSSII admin Demo',
     todos : []
   });
+}
 exports.del_User = function ( req, res, next ){
     User.remove({"_id":res._id}).run(function(err){
         if(err){
