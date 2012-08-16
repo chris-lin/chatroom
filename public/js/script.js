@@ -64,13 +64,11 @@
 
   // Easy templating
   App.prototype.msgTmpl = function(locals){
-
     var time = moment(locals.time).format("HH:mm");
-
     var buf = [
       '<p class="chat-msg">'
       , '<time class="chat-msg-time">[' + time + ']</time>'
-      , '<span class="chat-msg-user">' + locals.username + '</span>'
+      , '<span class="chat-msg-user">' + locals.talked_by + '</span>'
       , '<span class="chat-msg-bd">' + locals.msg + '</span>'
       , '</p>'
     ];
@@ -145,7 +143,7 @@
 
     // Append message to page directly without waiting
     app.newMessage({
-      username: app.username
+      talked_by: app.username
       , msg: val
       , time: new Date()
     });
@@ -171,45 +169,3 @@
   });
 
 })();
-
-  //~ // Helper function for getting cookies
-  //~ var getCookie = function(attr) {
-    //~ var cookieArr = document.cookie.split(/\=|;\s/g);
-    //~
-    //~ if (cookieArr.indexOf(attr) !== -1) {
-      //~ return cookieArr[cookieArr.indexOf(attr)+1];
-    //~ } else {
-      //~ return "";
-    //~ }
-  //~ }
-
-  //~ // Get username from user with a prompt. If username clicks cancel, ask get again!
-  //~ App.prototype.getUsername = function(forced) {
-    //~
-    //~ // Try getting username from cookie
-    //~ if (getCookie('username').length > 1 && !forced) {
-      //~ var name = getCookie('username');
-    //~ } else {
-      //~ var name = prompt('What is your name?');
-    //~ }
-    //~
-    //~ if (name != null && name != "" ) {
-      //~ // Emit username join event
-      //~ this.socket.emit('join', name);
-      //~
-      //~ // Set username on app
-      //~ this.username = name;
-      //~
-      //~ document.cookie = "username=" + name;
-      //~
-    //~ } else {
-      //~ this.getUsername();
-    //~ }
-    //~
-    //~ return this;
-    //~
-  //~ }
-
-
-//~ .r
-//~ a.change-username(href="#") Change My Name

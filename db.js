@@ -7,12 +7,23 @@ var Todo = new Schema({
     updated_at : Date
 });
 
+
 var chat_user = new Schema({
     id    : { type : String, unique : true },
     pwd   : String
 });
 
+var Records = new Schema({
+  talked_by: String,
+  time : Date,
+  msg : String
+});
+
+
+
 mongoose.model( 'Todo', Todo );
 mongoose.model( 'chat_user', chat_user );
+mongoose.model( 'Records', Records );
+
 
 mongoose.connect( 'mongodb://localhost/ossii-chat' );

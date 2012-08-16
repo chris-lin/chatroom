@@ -1,0 +1,83 @@
+coolection:
+
+    Users{
+    
+        _id : Object(),
+        
+        user_name : {
+            first : String,
+            last : String,
+            nick : String,
+            english : String
+        }
+        
+        introduction:{
+        
+            interest:{
+                1 : String,
+                2 : String
+            },
+            
+            photo : String,
+            
+            contact : {
+                email : String,
+                address : String,
+                phone : {
+                    Mobile : String,
+                    local_calls : {
+                        1 : Sting,
+                        2 : String
+                    }
+                }
+            }
+            
+            family : {
+            
+                dad : {
+                    name : String,
+                    job : String,
+                    contact : {
+                        address : String,
+                        email : String,
+                        phone : {
+                            mobile : String,
+                            local_calls : {
+                                1 : String,
+                                2 : String
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+            school : {
+            
+                Elementary_school : {
+                    academic : {
+                        school_name : String,
+                        year : int,
+                        last_semester : {
+                            order : String //班級
+                            grade : String //年級
+                            Tutor : String //導師
+                        } 
+                    }
+                }
+            }
+        }
+        
+    }
+
+
+-----------------------------------------------------------------------------------------------------------
+
+    Chat_history{
+        dialogue : {
+            from :  Users._id,
+            to : Users._id,
+            content : String,
+            time : time()
+        }
+    }
