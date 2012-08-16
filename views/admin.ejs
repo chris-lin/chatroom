@@ -1,0 +1,102 @@
+<% if (everyauth.loggedIn && user.id == 'admin') { %>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+
+            <a class="brand" href="#">聊天室後台管理界面</a>
+            <div class="btn-group pull-right">
+                <a class="btn btn-large btn-inverse" href="#">
+                    <i class="icon-user icon-white"></i>
+                    username
+                </a>
+                <a class="btn btn-large btn-inverse" href="#">
+                    <i class="icon-off icon-white"></i>
+                    Logout
+                </a>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+    
+
+    
+<div class="container-fluid admin-block">
+    <div class="row-fluid dashboard">
+        <div class="span3">
+          <div class="sidebar-nav ">
+            <ul class="nav nav-list admin-ul">
+                <li class="nav-header">Sidebar</li>
+                <li class="active"><a href="#"><i class="icon-user"></i> 使用者管理</a></li>
+                <li><a href="#"><i class="icon-user"></i> 群組管理</a></li>
+                <li><a href="#"><i class="icon-user"></i> 訊息管理</a></li>
+            </ul>
+            </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+            <div class="admin-table ">
+                <table class="table table-striped content-Table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>暱稱</th>
+                            <th>帳號</th>
+                            <th>群組</th>
+                            <th>功能</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Chris</td>
+                            <td>chrislin</td>
+                            <td>一般使用者</td>
+                            <td>
+                                <a href="#"><i class="icon-wrench"></i></a>
+                                <a href="#"><i class="icon-remove"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Tomas</td>
+                            <td>tomaslin</td>
+                            <td>一般使用者</td>
+                            <td>
+                                <a href="#"><i class="icon-wrench"></i></a>
+                                <a href="#"><i class="icon-remove"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Sean</td>
+                            <td>seanlin</td>
+                            <td>一般使用者</td>
+                            <td>
+                                <a href="#"><i class="icon-wrench"></i></a>
+                                <a href="#"><i class="icon-remove"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="pagination pagination-centered">
+        <ul class="">
+            <li><a href="#">Prev</a></li>
+            <li class="active">
+            <a href="#">1</a>
+            </li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">Next</a></li>
+        </ul>
+        </div>
+       
+    </div><!--/row-->
+    
+</div><!--/.fluid-container-->
+
+<% } %>

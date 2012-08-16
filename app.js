@@ -59,6 +59,7 @@ app.configure(function(){
 
 app.get('/', routes.index);
 app.get('/create', routes.create );
+app.get('/admin', auth.requireLogin, auth.requireAdmin, routes.admin );
 /*
 app.post( '/create', auth.requireLogin, routes.create );
 app.get( '/destroy/:id', auth.requireLogin, routes.destroy );
