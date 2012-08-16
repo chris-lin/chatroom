@@ -12,10 +12,10 @@ var Groups = new Schema({
     groupsname : String
     });
 
-var Message = new Schema({
+var Records = new Schema({
+            talked_by: String,
             time : Date,
-            info : String,
-            user_id: String
+            msg : String
             });
 
 var User = new Schema({
@@ -28,6 +28,6 @@ var User = new Schema({
 mongoose.model( 'Todo', Todo );
 mongoose.model( 'User', User );
 mongoose.model( 'Groups', Groups );
-mongoose.model( 'Message', Message );
+mongoose.model( 'Records', Records );
 
 mongoose.connect( 'mongodb://localhost/ossii-chat' );

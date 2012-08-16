@@ -18,8 +18,9 @@ var auth = require( './auth' );
 // add everyauth view helpers to express
 everyauth.helpExpress( app );
 
-var routes = require('./routes')
-
+var routes = require('./routes');
+//admin setup
+var admin = require('./admin');
 /*
 // Stylus compile function
 var compile = function (str, path) {
@@ -59,6 +60,8 @@ app.configure(function(){
 
 app.get('/', routes.index);
 app.get('/create', routes.create );
+app.get('/', routes.create );
+
 /*
 app.post( '/create', auth.requireLogin, routes.create );
 app.get( '/destroy/:id', auth.requireLogin, routes.destroy );

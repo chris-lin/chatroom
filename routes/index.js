@@ -32,7 +32,7 @@ exports.index = function ( req, res, next ){
 };
 
 exports.create = function ( req, res, next ){
-    console.log("abcdefghijklmnopqrstuvwxyz")
+   //console.log("abcdefghijklmnopqrstuvwxyz")
     res.render( 'create', {
         title : 'OSSII Chat - Create',
     });
