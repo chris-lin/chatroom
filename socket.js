@@ -9,11 +9,11 @@ module.exports = function(app) {
   io.configure(function(){
     io.set('log level', 2)
   });
-  
+
   // Recordss buffer
   var buffer = [];
   var users = [];
-  
+
   //Inert ingo MongoDB
   var pushBuffer = function(data) {
     new Records(data).save();
@@ -36,22 +36,22 @@ module.exports = function(app) {
   }
 
   io.sockets.on('connection', function(socket){
-  
+
       // When user joins
       socket.on('join', function(username){
-        
+
         // Try to get old username
           socket.get('username', function(err, oldUsername){
-          
+
           // Set new username
               socket.set('username', username, function() {
-                  addUsers(username)
+
                   if (oldUsername && oldUsername.length > 0) {
                       var msg = oldUsername + " has just renamed to " + username;
-                  } 
+                  }
                   else {
+                      addUsers(username);
                       var msg = username + " 進來晟鑫聊天室";
-                      
                       var data = {
                           msg:msg
                           , talked_by: '系統'
@@ -59,9 +59,11 @@ module.exports = function(app) {
                           , system: true
                           , onlineUsers: getUsersCount()
                           }
+                      //io.sockets.emit('system', data);
+                      io.sockets.emit('users', users);
                       io.sockets.emit('system', data);
-                      
-                      Records.find().limit(10).sort('time', -1).run(function(err,docs){
+
+                      Records.find().limit(10).sort('time', 1).run(function(err,docs){
                           for(i=0;i<docs.length;i++){
                               var data = {
                                   msg:docs[i].msg
@@ -72,22 +74,19 @@ module.exports = function(app) {
                               };
                               socket.emit('system', data);
                           }
-                          
                           // Emit system Records that user joins the chat
-                          io.sockets.emit('users', users);
-                          io.sockets.emit('system', data);
                           //console.log(data);
                       });
-                    
+
                       // Emit Recordss in buffer
                       for (i in buffer) {
                           if (buffer[i].system) socket.emit('system', buffer[i]);
                           else socket.emit('msg', buffer[i]);
                       }
-                       
-                  
+
+
                   }
-              
+
               });
           });
       });
@@ -95,9 +94,9 @@ module.exports = function(app) {
       socket.on('disconnect', function(){
           socket.get('username', function(err, username) {
           if (!username) return false;
-          
+
           removeUsers(username);
-          
+
           var data = {
             msg: username + " 離開晟鑫聊天室."
             , talked_by: '系統'
@@ -105,23 +104,23 @@ module.exports = function(app) {
             , system: true
             , onlineUsers: getUsersCount()
           };
-          
+
           // Emit system Records that user leaves the chat
           socket.broadcast.emit('system', data);
           socket.broadcast.emit('users', users);
-          
+
           //pushBuffer(data);
-          
+
         })
-        
+
       });
       // When user gets Message
       socket.on('msg', function(msg){
           // Add in check if Records isn't empty
-          if (msg && msg.length < 1) return false;      
+          if (msg && msg.length < 1) return false;
           // Get username first
           socket.get('username', function(err, username) {
-          //console.log("username username = "+username);  
+          //console.log("username username = "+username);
           User.find({"id":username}).run( function (err, docs) {
               // console.log(docs);
 
@@ -133,12 +132,12 @@ module.exports = function(app) {
               // Broadcast the data
               socket.broadcast.emit('msg', data);
               pushBuffer(data);
-              });//*/  
+              });//*/
           });
-            
 
-      });  
-    
+
+      });
+
       return io;
 
   });
