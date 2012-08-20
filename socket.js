@@ -63,26 +63,20 @@ module.exports = function(app) {
                       io.sockets.emit('users', users);
                       io.sockets.emit('system', data);
 
-                      Records.find().limit(10).sort('time', 1).run(function(err,docs){
-                          for(i=0;i<docs.length;i++){
+                      Records.find().limit(10).sort('time', -1).run(function(err,docs){
+                          for(i = docs.length-1; i>=0; i--){
                               var data = {
                                   msg:docs[i].msg
                                   , talked_by: docs[i].talked_by
-                                  , time: new Date()
+                                  , time: docs[i].time
                                   , system: true
                                   , onlineUsers: getUsersCount()
                               };
-                              socket.emit('system', data);
+                              socket.emit('msg', data);
                           }
                           // Emit system Records that user joins the chat
                           //console.log(data);
                       });
-
-                      // Emit Recordss in buffer
-                      for (i in buffer) {
-                          if (buffer[i].system) socket.emit('system', buffer[i]);
-                          else socket.emit('msg', buffer[i]);
-                      }
 
 
                   }
