@@ -8,3 +8,9 @@
     max-width: 350px;
     text-align: center;
 }
+
+@media (max-width: 979px) {
+    .create-block {
+        margin-top:20px;
+    }
+}
