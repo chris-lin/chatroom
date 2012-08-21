@@ -7,7 +7,7 @@
 var utils    = require( 'connect' ).utils;
 var everyauth= require( 'everyauth' );
 var db = require('../db');
-var User     = db.chat_User.model( 'chat_User');
+var chat_users = db.chat_users.model( 'chat_users');
 /*
 var users = mongoose.model( 'chat_User');
 //*/

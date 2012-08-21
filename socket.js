@@ -1,10 +1,8 @@
-
-//------------------------------------------------------------------------------------------------------
 var everyauth = require('everyauth');
 var mongoose = require( 'mongoose' );
 var db = require('./db');
-var chat_user     = db.chat_User.model( 'chat_User');
-var Records    = db.Records.model( 'chat_history');
+var chat_users     = db.chat_users.model( 'chat_users');
+var chat_history    = db.Records.model( 'chat_histories');
 
 module.exports = function(app) {
   var io = require('socket.io').listen(app);
@@ -19,7 +17,7 @@ module.exports = function(app) {
 
   //Inert ingo MongoDB
   var pushBuffer = function(data) {
-    new Records(data).save();
+    new chat_history(data).save();
   }
 
   // Count how many sockets are connected
@@ -66,7 +64,7 @@ module.exports = function(app) {
                       io.sockets.emit('users', users);
                       io.sockets.emit('system', data);
 
-                      //~ /*Records.find().limit(10).sort('time', -1).run(function(err,docs){
+                      //~ /*chat_history.find().limit(10).sort('time', -1).run(function(err,docs){
                           //~ console.log(docs);
                           //~ for(i = docs.length-1; i>=0; i--){
                               //~ var data = {
@@ -119,7 +117,7 @@ module.exports = function(app) {
           // Get username first
           socket.get('username', function(err, username) {
           //console.log("username username = "+username);  
-          chat_user.find({"id":username}).run( function (err, docs) {
+          chat_users.find({"id":username}).run( function (err, docs) {
               // console.log(docs);
 
               var data = {
