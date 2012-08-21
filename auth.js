@@ -1,6 +1,8 @@
 var everyauth = require('everyauth');
 var mongoose = require( 'mongoose' );
-var chat_user = mongoose.model( 'chat_user' );
+var db = require('./db');
+var chat_user     = db.chat_User.model( 'chat_User');
+//var chat_user = mongoose.model( 'chat_User' );
 
 everyauth.everymodule.findUserById( function (userId, callback) {
     chat_user.

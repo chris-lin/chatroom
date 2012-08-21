@@ -64,11 +64,11 @@
 
   // Easy templating
   App.prototype.msgTmpl = function(locals){
-    var time = moment(locals.time).format("HH:mm");
+    var time = moment(locals.post_time).format("HH:mm");
     var buf = [
       '<p class="chat-msg">'
       , '<time class="chat-msg-time">[' + time + ']</time>'
-      , '<span class="chat-msg-user">' + locals.talked_by + '</span>'
+      , '<span class="chat-msg-user">' + locals.from + '</span>'
       , '<span class="chat-msg-bd">' + locals.msg + '</span>'
       , '</p>'
     ];
@@ -143,9 +143,9 @@
 
     // Append message to page directly without waiting
     app.newMessage({
-      talked_by: app.username
+      from: app.username
       , msg: val
-      , time: new Date()
+      , post_time: new Date()
     });
     return this;
   }

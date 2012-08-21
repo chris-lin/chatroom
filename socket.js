@@ -1,7 +1,11 @@
+
+//------------------------------------------------------------------------------------------------------
 var everyauth = require('everyauth');
 var mongoose = require( 'mongoose' );
-var User     = mongoose.model( 'chat_user');
-var Records    = mongoose.model( 'Records');
+var db = require('./db');
+var User     = db.chat_User.model( 'chat_User');
+var Records    = db.Records.model( 'chat_History');
+
 
 module.exports = function(app) {
   var io = require('socket.io').listen(app);
@@ -54,19 +58,19 @@ module.exports = function(app) {
                       
                       var data = {
                           msg:msg
-                          , talked_by: '系統'
-                          , time: new Date()
+                          , from: '系統'
+                          , post_time: new Date()
                           , system: true
                           , onlineUsers: getUsersCount()
                           }
                       io.sockets.emit('system', data);
                       
-                      Records.find().limit(10).sort('time', -1).run(function(err,docs){
+                      Records.find().limit(10).sort('post_time', -1).run(function(err,docs){
                           for(i=0;i<docs.length;i++){
                               var data = {
                                   msg:docs[i].msg
-                                  , talked_by: docs[i].talked_by
-                                  , time: new Date()
+                                  , from: docs[i].from
+                                  , post_time: new Date()
                                   , system: true
                                   , onlineUsers: getUsersCount()
                               };
@@ -100,8 +104,8 @@ module.exports = function(app) {
           
           var data = {
             msg: username + " 離開晟鑫聊天室."
-            , talked_by: '系統'
-            , time: new Date()
+            , from: '系統'
+            , post_time: new Date()
             , system: true
             , onlineUsers: getUsersCount()
           };
@@ -122,12 +126,12 @@ module.exports = function(app) {
           // Get username first
           socket.get('username', function(err, username) {
           //console.log("username username = "+username);  
-          User.find({"id":username}).run( function (err, docs) {
+          chat_user.find({"id":username}).run( function (err, docs) {
               // console.log(docs);
 
               var data = {
-                          talked_by: username
-                          , time: new Date()
+                          from: username
+                          , post_time: new Date()
                           , msg: msg
                           }
               // Broadcast the data
