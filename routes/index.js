@@ -4,9 +4,10 @@
  */
 
 var mongoose = require( 'mongoose' );
-var Todo     = mongoose.model( 'Todo' );
+//var Todo     = mongoose.model( 'Todo' );
 var utils    = require( 'connect' ).utils;
 var everyauth= require( 'everyauth' );
+var users = mongoose.model( 'chat_users');
 
 exports.index = function ( req, res, next ){
 
@@ -38,12 +39,23 @@ exports.create = function ( req, res, next ){
 };
 
 exports.admin = function ( req, res, next ){
-    console.log('route-admin');
-    res.render( 'admin', {
-        title : 'OSSII Chat - admin',
-    });
+    res.redirect( '/admin/user' );
 };
+exports.userManager = function ( req, res, next ){
 
+    users.find(function (err, data) {
+      
+        console.dir(data.length);
+        console.dir(data);
+        
+        res.render( 'admin', {
+            title : 'OSSII Chat - admin',
+            page: 'userManager',
+        people: data
+        });
+    });
+    
+};
 
 /*
 exports.create = function ( req, res, next ){

@@ -1,6 +1,6 @@
 var everyauth = require('everyauth');
 var mongoose = require( 'mongoose' );
-var User     = mongoose.model( 'chat_user');
+var User     = mongoose.model( 'chat_users');
 var Records    = mongoose.model( 'Records');
 
 module.exports = function(app) {

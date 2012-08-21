@@ -1,14 +1,14 @@
 var mongoose = require( 'mongoose' );
 var Schema   = mongoose.Schema;
-
+/*
 var Todo = new Schema({
     user_id    : String,
     content    : String,
     updated_at : Date
 });
+*/
 
-
-var chat_user = new Schema({
+var chat_users = new Schema({
     id    : { type : String, unique : true },
     pwd   : String
 });
@@ -21,9 +21,9 @@ var Records = new Schema({
 
 
 
-mongoose.model( 'Todo', Todo );
-mongoose.model( 'chat_user', chat_user );
+//mongoose.model( 'Todo', Todo );
+mongoose.model( 'chat_users', chat_users );
 mongoose.model( 'Records', Records );
 
 
-mongoose.connect( 'mongodb://localhost/ossii-chat' );
+mongoose.connect( 'mongodb://localhost/Users' );
