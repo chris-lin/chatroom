@@ -1,6 +1,8 @@
 <% if (everyauth.loggedIn) { %>
+<link rel='stylesheet' href='/css/chat.css' />
 <script src="/socket.io/socket.io.js" type="text/javascript"></script>
 <script src="/js/script.js" type="text/javascript"></script>
+<script src="/js/init.js" type="text/javascript"></script>
 
 <div class="navbar navbar-fixed-top title-bar">
   <div class="navbar-inner title-bar-inner">
@@ -30,7 +32,7 @@
       <div class="nav-collapse in collapse title-bar-list">
         <ul class="nav">
           <li>
-            <a href="#">在縣成員</a>
+            <a href="#chat-users">在縣成員</a>
           </li>
         </ul>
       </div>
@@ -38,11 +40,11 @@
   </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid main-box enyo-fit">
 
-  <div class="row-fluid">
+  <div class="row-fluid main-container">
     <div class="span10 chatBox">
-      <div class="row-fluid">
+      <div class="row-fluid chatContainer">
         <div class="span12">
           <div class="chat">
             <div class="chat-bd">
@@ -57,7 +59,7 @@
             <form class="chat-form">
               <input class="chat-submit btn btn-primary" type="submit" value="送出">
               <div class="chat-input-wrapper">
-                <input class="chat-input" type="text" placeholder="輸入訊息">
+                <input class="chat-input" type="text" placeholder="輸入訊息" maxlength="200">
               </div>
             </form>
           </div>
@@ -65,7 +67,7 @@
       </div>
     </div>
     <div class="span2 chat-usersBox">
-      <div class="chat-users">
+      <div id="chat-users" class="chat-users">
           <div class="c">
             <span class="online-users"></span>
           </div>
@@ -77,9 +79,6 @@
   </div>
 </div>
 
-<!--
-<script src="/js/init.js" type="text/javascript"></script>
--->
 <% } else { %>
 
 <div class="container container-bg">

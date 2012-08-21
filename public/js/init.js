@@ -2,24 +2,31 @@
   var chris = {};
   // Create app object
   var Chris = function(){
-    this.$body = $('.chat-bd');
-    this.$msgs = $('.chat-msgs');
-    this.$chat-users = $('.chat-users');
-    this.$users = $('.chat-usersList');
-    this.$userName = $('#userName');
-    this.$form = $('.chat-form');
-    this.$top-tools = $('.btn-top-tools');
+    this.$html = $('html');
+    this.$main_box = $('.main-box');
+    this.$chat_bd = $('.chat-bd');
+    this.$chat_users = $('.chat-users ');
+    this.$tools = $('.btn-top-tools');
   };
 
   // Initialize after everything is ready
   Chris.prototype.init = function() {
-    this.bindSocketEvents();
-    this.bindViewEvents();
-    this.getUsername();
+    console.log(this.$html.height())
+    console.log($(document.body).height())
+    this.adjustScreen();
+  }
+
+  Chris.prototype.adjustScreen = function() {
+    var htmlHeight = this.$html.height();
+    var mainBoxHeight = htmlHeight - 80;
+    var chatBdHeight = mainBoxHeight - 50;
+    this.$main_box.height(mainBoxHeight)
+    this.$chat_bd.height(chatBdHeight)
+    this.$chat_users.height(mainBoxHeight)
   }
 
   Chris.prototype.event = function() {
-    this.$top-tools.on("click", this.tools)
+    this.$tools.on("click", this.tools)
   }
 
   Chris.prototype.tools = function(e) {
@@ -29,8 +36,8 @@
 
   // Document ready
   $(function(){
-    chris = window.chris = new App();
-    app.init();
+    chris = window.chris = new Chris();
+    chris.init();
     console.log("user.id = "+ app.$userName.html() )
   });
 

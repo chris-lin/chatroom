@@ -1,3 +1,5 @@
+
+
 @media (min-width: 980px) {
   .title-bar-list{
     display:none !important;
@@ -14,10 +16,6 @@
   .chat-usersBox{
     font-size: 14px !important;
   }
-  .btn-top-tools{
-    float: left !important;
-  }
-
 }
 
 @media (max-width: 767px) {
@@ -36,14 +34,11 @@
 }
 
 /* chat msg box */
-
-.chat{
-
-  margin:0 auto;
+.main-box{
+  border: 1px solid red;
 }
 
 .chat-bd{
-  height:400px;
   overflow-y:auto;
   background: whiteSmoke;
   border:0px solid #fdc255;
@@ -114,7 +109,6 @@
 
 .chat-users{
   background: whiteSmoke;
-  height:450px;
   overflow-y:auto;
   border:0px solid #fdc255;
   -webkit-border-radius:6px 6px 6px 6px;

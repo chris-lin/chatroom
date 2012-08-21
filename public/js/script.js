@@ -8,9 +8,7 @@
     this.$users = $('.chat-usersList');
     this.$userName = $('#userName');
     this.$form = $('.chat-form');
-
     this.socket = io.connect();
-
   };
 
   // Initialize after everything is ready
