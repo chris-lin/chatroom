@@ -10,14 +10,14 @@ var chat_User = new users_Schema({
     pwd   : String
 });
 
-var Records = new  records.Schema({
+var chat_history = new  records.Schema({
   from: String,
   post_time : Date,
   msg : String
 });
 
 users.model( 'chat_User', chat_User );
-records.model( 'chat_History', Records );
+records.model( 'chat_history', chat_history );
 users.connect('mongodb://localhost/users');
 records.connect('mongodb://localhost/Records');
 

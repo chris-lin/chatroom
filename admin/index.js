@@ -4,6 +4,7 @@
 var mongoose = require( 'mongoose' );
 //var User     = mongoose.model( 'chat_User' );
 
+
 exports.index = function ( req, res, next ){
 
   res.render( 'index', {

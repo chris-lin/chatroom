@@ -3,9 +3,14 @@
  * GET home page.
  */
 
-var mongoose = require( 'mongoose' );
+//var mongoose = require( 'mongoose' );
 var utils    = require( 'connect' ).utils;
 var everyauth= require( 'everyauth' );
+var db = require('../db');
+var User     = db.chat_User.model( 'chat_User');
+/*
+var users = mongoose.model( 'chat_User');
+//*/
 
 exports.index = function ( req, res, next ){
     
@@ -23,8 +28,20 @@ exports.create = function ( req, res, next ){
 
 exports.admin = function ( req, res, next ){
     
-    res.render( 'admin', {
-        title : 'OSSII Chat - admin',
-    });
+    res.redirect( '/admin/user' );
 };
+exports.userManager = function ( req, res, next ){
 
+    users.find(function (err, data) {
+      
+        console.dir(data.length);
+        console.dir(data);
+        
+        res.render( 'admin', {
+            title : 'OSSII Chat - admin',
+            page: 'userManager',
+        people: data
+        });
+    });
+    
+};

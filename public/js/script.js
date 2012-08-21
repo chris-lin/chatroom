@@ -54,7 +54,7 @@
 
 
     } else {
-      this.getUsername();
+        //this.getUsername();
     }
 
     return this;
@@ -162,10 +162,13 @@
   }
 
   // Document ready
-  $(function(){
-    app = window.app = new App();
-    app.init();
-    console.log("user.id = "+ app.$userName.html() )
-  });
+    $(document).ready(function(){
+        app = window.app = new App();
+        app.init();
+        console.log("user.id = "+ app.$userName.html() );
+    });
 
 })();
+
+
+

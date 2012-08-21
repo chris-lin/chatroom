@@ -61,6 +61,8 @@ app.configure(function(){
 app.get('/', routes.index);
 app.get('/create', routes.create );
 app.get('/admin', auth.requireLogin, auth.requireAdmin, routes.admin );
+//app.get('/admin/user', auth.requireLogin, auth.requireAdmin, routes.admin );
+app.get('/admin/user', routes.userManager );
 app.get('/del_user', admin.del_user );
 
 /*

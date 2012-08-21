@@ -1,4 +1,6 @@
 <% if (everyauth.loggedIn) { %>
+<script src="/socket.io/socket.io.js" type="text/javascript"></script>
+<script src="/js/script.js" type="text/javascript"></script>
 
 <div class="navbar navbar-fixed-top title-bar">
   <div class="navbar-inner title-bar-inner">
@@ -74,8 +76,10 @@
     </div>
   </div>
 </div>
-<script src="/js/init.js" type="text/javascript"></script>
 
+<!--
+<script src="/js/init.js" type="text/javascript"></script>
+-->
 <% } else { %>
 
 <div class="container container-bg">
