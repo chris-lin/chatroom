@@ -11,8 +11,6 @@
 
   // Initialize after everything is ready
   Chris.prototype.init = function() {
-    console.log(this.$html.height())
-    console.log($(document.body).height())
     this.adjustScreen();
   }
 
