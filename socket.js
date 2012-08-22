@@ -2,7 +2,7 @@ var everyauth = require('everyauth');
 var mongoose = require( 'mongoose' );
 var db = require('./db');
 var chat_users     = db.chat_users.model( 'chat_users');
-var chat_history    = db.Records.model( 'chat_histories');
+var chat_history    = db.chat_histories.model( 'chat_histories');
 
 module.exports = function(app) {
   var io = require('socket.io').listen(app);
@@ -27,9 +27,20 @@ module.exports = function(app) {
   }
 
   var addUsers = function(username) {
-    users.push(username);
-    users.sort();
-  }
+    var i;
+    for(i=0;i<users.length;i++){
+        if(users[i] == username){
+            var check_op="repeat";
+            return check_op;
+            break;
+            }
+        }
+    if(check_op != "repeat"){
+        users.push(username);
+        users.sort();
+        }
+    }
+  
 
   var removeUsers = function(username) {
     var key = users.indexOf(username);
@@ -51,7 +62,9 @@ module.exports = function(app) {
                       var msg = oldUsername + " has just renamed to " + username;
                   }
                   else {
-                      addUsers(username);
+                      var check_op;
+                      a=addUsers(username);
+                      console.log(check_op);
                       var msg = username + " 進來晟鑫聊天室";
                       var data = {
                           msg:msg
@@ -63,22 +76,21 @@ module.exports = function(app) {
                       //io.sockets.emit('system', data);
                       io.sockets.emit('users', users);
                       io.sockets.emit('system', data);
-
-                      //~ /*chat_history.find().limit(10).sort('time', -1).run(function(err,docs){
-                          //~ console.log(docs);
-                          //~ for(i = docs.length-1; i>=0; i--){
-                              //~ var data = {
-                                  //~ msg:docs[i].msg
-                                  //~ , from: docs[i].talked_by
-                                  //~ , post_time: docs[i].time
-                                  //~ , system: true
-                                  //~ , onlineUsers: getUsersCount()
-                              //~ };
-                              //~ socket.emit('msg', data);
-                          //~ }
-                          //~ // Emit system Records that user joins the chat
-                          //~ //console.log(data);
-                      //~ });//*/
+                      
+                      chat_history.find().limit(10).sort('time', -1).run(function(err,docs){
+                          for(i = docs.length-1; i>=0; i--){
+                              var data = {
+                                  msg:docs[i].msg
+                                  , from: docs[i].from
+                                  , post_time: docs[i].time
+                                  , system: true
+                                  , onlineUsers: getUsersCount()
+                              };
+                              socket.emit('msg', data);
+                          }
+                          // Emit system Records that user joins the chat
+                          //console.log(data);
+                      });//*/
 
 
                   }

@@ -6,7 +6,6 @@ var records_Schema   = records.Schema;
 
 var chat_users = new users_Schema({
     id    : { type : String, unique : true },
-    email   : String,
     pwd   : String
 });
 
@@ -22,4 +21,4 @@ users.connect('mongodb://localhost/Users');
 records.connect('mongodb://localhost/Records');
 
 exports.chat_users = users;
-exports.Records = records;
+exports.chat_histories = records;

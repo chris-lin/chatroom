@@ -1,17 +1,15 @@
-var mongoose = require( 'mongoose' );
-var records = new mongoose.Mongoose();
+var records = require("mongeese").create();
 
-//var records = require( 'mongoose' );
-var Schema   = mongoose.Schema;
+var records_Schema   = records.Schema;
 
-
-var Records = new Schema({
-  from: String,
-  time : Date,
+var chat_histories = new records.Schema({
+  from : String,
+  post_time : Date,
   msg : String
 });
 
-records.model( 'Records', Records );
+records.model( 'chat_histories', chat_histories );
 
-records.connect('mongodb://localhost/records');
-//records.createConnection( 'localhost','records','5000' );
+records.connect('mongodb://localhost/Records');
+
+exports.chat_histories = records;

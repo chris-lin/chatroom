@@ -1,10 +1,10 @@
 var everyauth = require('everyauth');
-var mongoose = require( 'mongoose' );
+//var mongoose = require( 'mongoose' );
 var db = require('./db');
-var chat_users = db.chat_users.model( 'chat_users');
+var chat_user = db.chat_users.model( 'chat_users');
 
 everyauth.everymodule.findUserById( function (userId, callback) {
-    chat_users.
+    chat_user.
       findOne({ id : userId }).
       run( callback );
 });
@@ -15,7 +15,7 @@ everyauth.password
     .loginView('index')
     .authenticate( function (login, password) {
         var promise = this.Promise();
-        chat_users.
+        chat_user.
             findOne({ id : login , pwd : password }).
             run( function ( err, user ){
                 if ( !user ) {
@@ -38,7 +38,7 @@ everyauth.password
     })
     .registerUser( function (newUser) {
         var promise = this.Promise();
-        new chat_users({
+        new chat_user({
             id : newUser.login,
             pwd : newUser.password
         }).save( function ( err, user, count ){
