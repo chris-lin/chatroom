@@ -1,33 +1,3 @@
-
-
-@media (min-width: 980px) {
-  .title-bar-list{
-    display:none !important;
-  }
-}
-
-@media (max-width: 979px) {
-  .title-bar-btn{
-    display: none !important;
-  }
-  .title-bar-inner{
-    padding: 0 !important;
-  }
-  .chat-usersBox{
-    font-size: 14px !important;
-  }
-}
-
-@media (max-width: 767px) {
-  body {
-    padding-right: 20px;
-    padding-left: 20px;
-  }
-  .title-bar-btn{
-    display: block !important;
-  }
-}
-
 .chatroomName{
   padding:10.5px;
   color:#fff;
@@ -35,7 +5,7 @@
 
 /* chat msg box */
 .main-box{
-  border: 1px solid red;
+  border: 0px solid red;
 }
 
 .chat-bd{
@@ -67,23 +37,28 @@
 }
 
 /* messagesBox */
-
-.chat-ft{
-  padding:10px 3px;
-  height:40px;
+.messagesBox{
+  line-height: 50px;
+  border: 0px solid red;
+  overflow:hidden;
 }
 
 .chat-form{
+  margin: 0;
+  overflow: hidden;
+}
+
+.chat-fl{
+  float: left;
+  width: 85%;
   overflow:hidden;
 }
 
-.chat-input-wrapper{
-  overflow:hidden;
-  padding:6px 0px;
+.chat-fr{
+  float: right;
 }
 
-/*  .chat-input[type="text"] */
-.chat-input{
+.chat-input[type="text"]{
   font-size:20px;
   width:100%;
   margin:0;
@@ -98,11 +73,13 @@
 
 .chat-submit{
   font-size:20px;
-  float:right;
-  margin-left:10px;
-  padding:10px 21px;
-  border:none;
+  vertical-align: middle;
+  padding: 10px 5px;
   color:#fff;
+}
+
+.chat-submit > .icon-bullhorn{
+  vertical-align: middle;
 }
 
 /* usersBox */
@@ -120,10 +97,8 @@
   width:95%;
   margin: 0 auto;
   padding: 10px 0;
-
   color:#D51A1A;
   text-align:center;
-
 }
 
 .c p{
@@ -140,4 +115,40 @@
 
 .chat-usersList li{
   line-height:26px;
+}
+
+
+
+@media (min-width: 980px) {
+  .title-bar-list{
+    display:none !important;
+  }
+}
+
+@media (max-width: 979px) {
+  .title-bar-btn{
+    display: none !important;
+  }
+  .title-bar-inner{
+    padding: 0 !important;
+  }
+  .chat-submit{
+    font-size: 14px;
+  }
+  .chat-usersBox{
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  .chat-submit{
+    font-size: 12px;
+  }
+  .title-bar-btn{
+    display: block !important;
+  }
 }

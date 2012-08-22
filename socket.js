@@ -26,6 +26,9 @@ module.exports = function(app) {
   }
 
   var addUsers = function(username) {
+    for(var key in users){
+      if(users[key] == username) return;
+    }
     users.push(username);
     users.sort();
   }
