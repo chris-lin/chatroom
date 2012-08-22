@@ -4,34 +4,22 @@
 
 var express = require('express')
 //  , stylus = require('stylus')
-  , nib = require('nib')
-  , everyauth = require('everyauth');
+  , nib = require('nib');
 
 var app = module.exports = express.createServer();
 
+var parseCookie = require('connect').utils.parseCookie,
+    MemoryStore = require('connect/lib/middleware/session/memory');
+//建立一个memory store的实例
+var storeMemory = new MemoryStore({
+    reapInterval: 60000 * 10
+});
+
 // mongoose setup
-require( './db' );
-
-// autoentication setup
-var auth = require( './auth' );
-
-// add everyauth view helpers to express
-everyauth.helpExpress( app );
-
+//require( './db' );
 
 //admin setup
-var admin = require('./admin');
-/*
-// Stylus compile function
-var compile = function (str, path) {
-  return stylus(str)
-    .set('filename', path)
-    .set('compress', true)
-    .use(nib());
-};
-*/
-
-var routes = require('./routes');
+//var admin = require('./admin');
 
 // Configuration
 app.configure(function(){
@@ -42,44 +30,32 @@ app.configure(function(){
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.session({secret: 'nodeTWParty'}) );
-  app.use(everyauth.middleware() );
-  app.use(app.router);
-  // 必須要放在stylus下面 stylus才會有效
-  app.use(express.static(__dirname + '/public'));
-  /*
-  // Insert Stylus middleware before creating static with Express
-  app.use(stylus.middleware({
-    src: __dirname + '/src/public'
-    , dest: __dirname + '/public'
-    , compile: compile
+  app.use(express.session({
+    secret: 'OSSII Chat',
+    store: storeMemory 
   }));
-  */
+  app.use(app.router);
+  app.use(express.static(__dirname + '/public'));
+
 });
 
 
 // Routes
-
+var routes = require('./routes');
 
 app.get('/', routes.index);
+app.post('/login', routes.login);
 app.get('/create', routes.create );
-app.get('/admin', auth.requireLogin, auth.requireAdmin, routes.admin );
+app.post('/create', routes.create );
+app.get('/logout', routes.logout );
+//app.get('/admin', auth.requireLogin, auth.requireAdmin, routes.admin );
 //app.get('/admin/user', auth.requireLogin, auth.requireAdmin, routes.admin );
-app.get('/admin/user', routes.userManager );
-app.get('/del_user', admin.del_user );
-app.get('/wtf', routes.whatthefuck );
-/*
-app.post( '/create', auth.requireLogin, routes.create );
-app.get( '/destroy/:id', auth.requireLogin, routes.destroy );
-app.get( '/edit/:id', auth.requireLogin, routes.edit );
-app.post( '/update/:id', auth.requireLogin, routes.update );
-*/
+//app.get('/admin/user', routes.userManager );
+//app.get('/del_user', admin.del_user );
 
 app.listen(3000, function(){
-
   // Start SocketIO after app is initialized
   app.sockets = require('./socket')(app);
-
-
+  
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });

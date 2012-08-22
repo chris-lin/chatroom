@@ -5,11 +5,10 @@ var chat_user = db.chat_users.model( 'chat_users');
 
 everyauth.everymodule.findUserById( function (userId, callback) {
     for (i in arguments) {
-        console.dir(arguments[i]);
+        console.dir( i + ' = ' + arguments[i]);
     }
-    
     chat_user.
-      findOne({ 'email' : userId }).
+      findOne({ email : userId }).
       run( callback );
 });
 
@@ -20,7 +19,7 @@ everyauth.password
     .authenticate( function (login, password) {
         var promise = this.Promise();
         chat_user.
-            findOne({ 'email' : login , 'pwd' : password }).
+            findOne({ email : login , pwd : password }).
             run( function ( err, user ){
                 if ( !user ) {
                     err = 'Invalid login';
@@ -31,12 +30,12 @@ everyauth.password
             });
         return promise;
     })
-    .loginSuccessRedirect('/') // Where to redirect to after login
+    .loginSuccessRedirect('/wtf') // Where to redirect to after login
     .getRegisterPath('/create') // Registration url
     .postRegisterPath('/create') // Url that your registration form POSTs to
     .registerView('create')
     .validateRegistration( function (newUser) {
-        console.log(newUser)
+        
         if (!newUser.login || !newUser.password) {
             return ['Either ID or Password is missing.'];
         }
@@ -44,15 +43,16 @@ everyauth.password
     })
     .registerUser( function (newUser) {
         var promise = this.Promise();
+        console.log(newUser)
         new chat_user({
-            'email' : newUser.login,
-            'pwd' : newUser.password
+            email : newUser.login,
+            pwd : newUser.password
         }).save( function ( err, user, count ){
           if( err ) return promise.fulfill( [ err ] );
           promise.fulfill( user );
         });
-    return promise;
-  })
+        return promise;
+    })
   .registerSuccessRedirect('/') // Url to redirect to after a successful registration
   .loginLocals( {title: 'OSSII chat'})
   .registerLocals( {title: 'Login'});
