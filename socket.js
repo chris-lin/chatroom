@@ -15,6 +15,16 @@ module.exports = function(app) {
   var buffer = [];
   var users = [];
 
+  var broadcast = function(msg,username,time,io,option){
+    var data = {
+                    msg:msg
+                    , from: username
+                    , post_time: time
+                    , system: option
+                    , onlineUsers: getUsersCount()
+                    }
+                    io.sockets.emit('system', data);
+      }
   //Inert ingo MongoDB
   var pushBuffer = function(data) {
     new chat_history(data).save();
@@ -63,36 +73,25 @@ module.exports = function(app) {
                   }
                   else {
                       var check_op;
-                      a=addUsers(username);
-                      console.log(check_op);
+                      addUsers(username);
                       var msg = username + " 進來晟鑫聊天室";
-                      var data = {
-                          msg:msg
-                          , from: '系統'
-                          , post_time: new Date()
-                          , system: true
-                          , onlineUsers: getUsersCount()
-                          }
-                      //io.sockets.emit('system', data);
+                      broadcast(msg,username,new Date(),io,"true");
                       io.sockets.emit('users', users);
-                      io.sockets.emit('system', data);
-                      
                       chat_history.find().limit(10).sort('time', -1).run(function(err,docs){
                           for(i = docs.length-1; i>=0; i--){
-                              var data = {
-                                  msg:docs[i].msg
-                                  , from: docs[i].from
-                                  , post_time: docs[i].time
-                                  , system: true
-                                  , onlineUsers: getUsersCount()
-                              };
-                              socket.emit('msg', data);
+                              broadcast(docs[i].msg,docs[i].from,docs[i].time,io,"true");
+                              //~ var data = {
+                                  //~ msg:docs[i].msg
+                                  //~ , from: docs[i].from
+                                  //~ , post_time: docs[i].time
+                                  //~ , system: true
+                                  //~ , onlineUsers: getUsersCount()
+                              //~ };
+                              //~ socket.emit('msg', data);
                           }
                           // Emit system Records that user joins the chat
                           //console.log(data);
                       });//*/
-
-
                   }
 
               });
@@ -104,21 +103,9 @@ module.exports = function(app) {
           if (!username) return false;
 
           removeUsers(username);
-
-          var data = {
-            msg: username + " 離開晟鑫聊天室."
-            , from: '系統'
-            , post_time: new Date()
-            , system: true
-            , onlineUsers: getUsersCount()
-          };
-
-          // Emit system Records that user leaves the chat
-          socket.broadcast.emit('system', data);
-          socket.broadcast.emit('users', users);
-
-          //pushBuffer(data);
-
+          msg = username + " 離開晟鑫聊天室.";
+          broadcast(msg,users,new Date(),io,"true");
+          io.sockets.emit('users', users);
         })
 
       });
@@ -130,8 +117,6 @@ module.exports = function(app) {
           socket.get('username', function(err, username) {
           //console.log("username username = "+username);  
           chat_users.find({"id":username}).run( function (err, docs) {
-              // console.log(docs);
-
               var data = {
                           from: username
                           , post_time: new Date()
