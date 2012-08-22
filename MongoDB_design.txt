@@ -76,8 +76,8 @@ coolection:
     Chat_history{
         dialogue : {
             from :  Users._id,
-            to : Users._id,
-            content : String,
-            time : time()
+           # to : Users._id,
+            msg : String,
+            post_time : time()
         }
     }

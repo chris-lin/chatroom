@@ -29,6 +29,9 @@
   }
 
   App.prototype.showUsers = function(users) {
+    var userCount = users.length;
+    console.log(users.length)
+    app.updateUsersCount(userCount);
     app.$users.empty();
 
     for(var key in users){
@@ -62,11 +65,11 @@
 
   // Easy templating
   App.prototype.msgTmpl = function(locals){
-    var time = moment(locals.time).format("HH:mm");
+    var time = moment(locals.post_time).format("HH:mm");
     var buf = [
       '<p class="chat-msg">'
       , '<time class="chat-msg-time">[' + time + ']</time>'
-      , '<span class="chat-msg-user">' + locals.talked_by + '</span>'
+      , '<span class="chat-msg-user">' + locals.from + '</span>'
       , '<span class="chat-msg-bd">' + locals.msg + '</span>'
       , '</p>'
     ];
@@ -88,8 +91,6 @@
     html.addClass('chat-system-msg');
     app.$msgs.append(html);
     app.scrolltoBtm();
-
-    app.updateUsersCount(data);
 
     return this;
   }
@@ -141,9 +142,9 @@
 
     // Append message to page directly without waiting
     app.newMessage({
-      talked_by: app.username
+      from: app.username
       , msg: val
-      , time: new Date()
+      , post_time: new Date()
     });
     return this;
   }
@@ -155,15 +156,14 @@
     return this;
   }
 
-  App.prototype.updateUsersCount = function(data) {
-    $('.online-users').text('線上人數 : ' + data.onlineUsers + '人');
+  App.prototype.updateUsersCount = function(count) {
+    $('.online-users').text('線上人數 : ' + count + '人');
   }
 
   // Document ready
     $(document).ready(function(){
         app = window.app = new App();
         app.init();
-        console.log("user.id = "+ app.$userName.html() );
     });
 
 })();

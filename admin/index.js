@@ -1,10 +1,9 @@
-
 /*
  * GET admin page.
  */
-
 var mongoose = require( 'mongoose' );
-var User     = mongoose.model( 'chat_users' );
+//var User     = mongoose.model( 'chat_User' );
+
 
 exports.index = function ( req, res, next ){
 
