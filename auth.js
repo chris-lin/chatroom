@@ -1,11 +1,15 @@
 var everyauth = require('everyauth');
 var mongoose = require( 'mongoose' );
 var db = require('./db');
-var chat_users = db.chat_users.model( 'chat_users');
+var chat_user = db.chat_users.model( 'chat_users');
 
 everyauth.everymodule.findUserById( function (userId, callback) {
-    chat_users.
-      findOne({ id : userId }).
+    for (i in arguments) {
+        console.dir(arguments[i]);
+    }
+    
+    chat_user.
+      findOne({ 'email' : userId }).
       run( callback );
 });
 
@@ -15,13 +19,14 @@ everyauth.password
     .loginView('index')
     .authenticate( function (login, password) {
         var promise = this.Promise();
-        chat_users.
-            findOne({ id : login , pwd : password }).
+        chat_user.
+            findOne({ 'email' : login , 'pwd' : password }).
             run( function ( err, user ){
                 if ( !user ) {
                     err = 'Invalid login';
                 }
                 if( err ) return promise.fulfill( [ err ] );
+                console.log('user = ' + user);
                 promise.fulfill( user );
             });
         return promise;
@@ -31,6 +36,7 @@ everyauth.password
     .postRegisterPath('/create') // Url that your registration form POSTs to
     .registerView('create')
     .validateRegistration( function (newUser) {
+        console.log(newUser)
         if (!newUser.login || !newUser.password) {
             return ['Either ID or Password is missing.'];
         }
@@ -38,12 +44,11 @@ everyauth.password
     })
     .registerUser( function (newUser) {
         var promise = this.Promise();
-        new chat_users({
-            id : newUser.login,
-            pwd : newUser.password
+        new chat_user({
+            'email' : newUser.login,
+            'pwd' : newUser.password
         }).save( function ( err, user, count ){
           if( err ) return promise.fulfill( [ err ] );
-
           promise.fulfill( user );
         });
     return promise;
@@ -64,7 +69,7 @@ module.exports.requireLogin = function( req, res, next ) {
     next();
 };
 module.exports.requireAdmin = function( req, res, next ) {
-    if ( req.user.id != 'admin' ) {
+    if ( req.user.email != 'admin' ) {
         res.redirect( '/' );
         return;
     }

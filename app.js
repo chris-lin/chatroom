@@ -18,7 +18,7 @@ var auth = require( './auth' );
 // add everyauth view helpers to express
 everyauth.helpExpress( app );
 
-var routes = require('./routes');
+
 //admin setup
 var admin = require('./admin');
 /*
@@ -30,6 +30,8 @@ var compile = function (str, path) {
     .use(nib());
 };
 */
+
+var routes = require('./routes');
 
 // Configuration
 app.configure(function(){
@@ -58,13 +60,14 @@ app.configure(function(){
 
 // Routes
 
+
 app.get('/', routes.index);
 app.get('/create', routes.create );
 app.get('/admin', auth.requireLogin, auth.requireAdmin, routes.admin );
 //app.get('/admin/user', auth.requireLogin, auth.requireAdmin, routes.admin );
 app.get('/admin/user', routes.userManager );
 app.get('/del_user', admin.del_user );
-
+app.get('/wtf', routes.whatthefuck );
 /*
 app.post( '/create', auth.requireLogin, routes.create );
 app.get( '/destroy/:id', auth.requireLogin, routes.destroy );

@@ -18,7 +18,13 @@ exports.index = function ( req, res, next ){
     title : 'OSSII chat Demo'
   });
 };
+exports.whatthefuck = function ( req, res, next ){
+    console.dir(req.loggedIn);
 
+    res.render( 'wtf', {
+        title : 'OSSII chat Demo'
+    });
+};
 exports.create = function ( req, res, next ){
 
     res.render( 'create', {
@@ -45,3 +51,4 @@ exports.userManager = function ( req, res, next ){
     });
     
 };
+
