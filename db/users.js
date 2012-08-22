@@ -5,8 +5,9 @@ var users_Schema   = users.Schema;
 var records_Schema   = records.Schema;
 
 var chat_users = new users_Schema({
-    id    : { type : String, unique : true },
-    pwd   : String
+    email : { type : String, unique : true },
+    pwd : String,
+    nickname : String
 });
 
 var chat_histories = new records.Schema({
