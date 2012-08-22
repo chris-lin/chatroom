@@ -1,6 +1,6 @@
 {
-  "name": "nodejstw-socketio",
-  "version": "0.0.7",
+  "name": "ossii-chat",
+  "version": "0.1",
   "private": true,
   "dependencies": {
     "express": "2.5.9",
@@ -12,7 +12,7 @@
     "connect"  : "1.8.7",
     "mongoose" : "2.6.7",
     "everyauth" : "0.2.32",
-    "mongeese" : "*"
+    "mongeese" : "0.0.1"
   },
   "subdomain": "nodejstw-socketio",
   "scripts": {

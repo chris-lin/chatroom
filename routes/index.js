@@ -37,20 +37,21 @@ exports.index = function ( req, res, next ){
 //  User Login & set session.
 exports.login = function ( req, res, next ){
     chat_user.
-        findOne({ 'email': req.body.email, 'pwd': req.body.password }).
-        run( function ( err, user ){
+        findOne({ 'email': req.body.email, 'pwd': req.body.password }, function ( err, user ){
+
             if ( !user ) {
                 //  login failure. redirect to index
                 req.session.isLogin = false;
-                res.redirect( '/' );
-            };
-            //setting login config to session
-            req.session.isLogin = true;
-            req.session.user = {
-                'nickname': user.nickname,
-                'email': user.email,
-                'password': user.pwd 
-            };
+            } else {
+                //setting login config to session
+                req.session.isLogin = true;
+                req.session.user = {
+                    'nickname': user.nickname,
+                    'email': user.email,
+                    'password': user.pwd 
+                };
+                
+            }
             res.redirect( '/' );
         });
 };
