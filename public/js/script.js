@@ -22,15 +22,15 @@
 
     var buf = [
       '<li>'
-      , '<a href="#">' + user + '</a>'
+      , '<a class="chat-user" href="#">' + user + '</a>'
       , '</li>'
     ];
     return buf.join('');
   }
 
   App.prototype.showUsers = function(users) {
+    users = app.filterUsers(users);
     var userCount = users.length;
-    console.log(users.length)
     app.updateUsersCount(userCount);
     app.$users.empty();
 
@@ -42,6 +42,22 @@
     }
   }
 
+  App.prototype.filterUsers = function(usersList) {
+    var users = [];
+    for(var key in usersList){
+      addUsers(usersList[key])
+    }
+    return users;
+
+    function addUsers(username) {
+      for(var i in users){
+        if(users[i] == username) return;
+      }
+      users.push(username);
+      users.sort();
+    }
+  }
+
   // Get username from user with a prompt. If username clicks cancel, ask get again!
   App.prototype.getUsername = function() {
     var name = this.$userName.html();
@@ -49,19 +65,13 @@
     if (name != null && name != "" ) {
       // Emit username join event
       this.socket.emit('join', name);
-
       // Set username on app
       this.username = name;
-
-
     } else {
         //this.getUsername();
     }
-
     return this;
-
   }
-
 
   // Easy templating
   App.prototype.msgTmpl = function(locals){
@@ -81,7 +91,7 @@
     var html = app.msgTmpl(data);
     app.$msgs.append(html);
     app.scrolltoBtm();
-
+    chris.event();
     return this;
   }
 
@@ -89,15 +99,25 @@
   App.prototype.systemMessage = function(data) {
     var html = $(app.msgTmpl(data));
     html.addClass('chat-system-msg');
+    html.removeClass('chat-msg');
     app.$msgs.append(html);
     app.scrolltoBtm();
+    return this;
+  }
 
+  App.prototype.privateMessage = function(data) {
+    var html = $(app.msgTmpl(data));
+    html.addClass('chat-private-msg');
+    html.removeClass('chat-msg');
+    app.$msgs.append(html);
+    app.scrolltoBtm();
     return this;
   }
 
   // Bind socket events to functions
   App.prototype.bindSocketEvents = function() {
     this.socket.on('msg', this.newMessage);
+    this.socket.on('primsg', this.privateMessage);
     this.socket.on('system', this.systemMessage);
     this.socket.on('users', this.showUsers);
     return this;
@@ -106,16 +126,6 @@
   // Bind view events
   App.prototype.bindViewEvents = function() {
     this.$form.on('submit', this.submit);
-
-    var self = this;
-
-    //~ $('.change-username').on('click', function(e){
-      //~ e.preventDefault();
-      //~
-      //~ self.getUsername(true);
-      //~
-    //~ });
-
     return this;
   }
 
@@ -124,7 +134,7 @@
     e.preventDefault();
 
     // Get form value
-    var val = app.$form.find('.chat-input').val()
+    var val = app.$form.find('.chat-input').val();
 
     // Sanitize the message
     val = $("<p>"+val+"</p>")

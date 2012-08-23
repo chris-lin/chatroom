@@ -5,8 +5,11 @@
     this.$html = $('html');
     this.$main_box = $('.main-box');
     this.$chat_bd = $('.chat-bd');
-    this.$chat_users = $('.chat-users ');
+    this.$chat_userContainer = $('.chat-userContainer');
     this.$tools = $('.btn-top-tools');
+    this.$msg_user = $('.chat-msg > .chat-msg-user');
+    this.$chat_user = $('.chat-user');
+    this.$msg_input = $('.chat-input');
   };
 
   // Initialize after everything is ready
@@ -20,23 +23,24 @@
     var chatBdHeight = mainBoxHeight - 50;
     this.$main_box.height(mainBoxHeight)
     this.$chat_bd.height(chatBdHeight)
-    this.$chat_users.height(mainBoxHeight)
+    this.$chat_userContainer.height(mainBoxHeight)
   }
 
   Chris.prototype.event = function() {
-    this.$tools.on("click", this.tools)
+    $('.chat-msg > .chat-msg-user').on("click", this.privateMsg);
+    $('.chat-user').on("click", this.privateMsg);
   }
 
-  Chris.prototype.tools = function(e) {
-    //this.$chat-users
-
+  Chris.prototype.privateMsg = function(e) {
+    var user = this.innerHTML;
+    chris.$msg_input.val("@" + user + " ");
+    chris.$msg_input.focus();
   }
 
   // Document ready
   $(function(){
     chris = window.chris = new Chris();
     chris.init();
-    console.log("user.id = "+ app.$userName.html() )
   });
 
 })();

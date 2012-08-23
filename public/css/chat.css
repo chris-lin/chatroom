@@ -32,8 +32,16 @@
   color:#195073;
 }
 
+.chat-msg .chat-msg-user{
+  cursor: pointer;
+}
+
 .chat-system-msg{
   color:#7f8c1f;
+}
+
+.chat-system-msg > .chat-msg-user{
+  color: red;
 }
 
 /* messagesBox */
@@ -84,7 +92,7 @@
 
 /* usersBox */
 
-.chat-users{
+.chat-userContainer{
   background: whiteSmoke;
   overflow-y:auto;
   border:0px solid #fdc255;

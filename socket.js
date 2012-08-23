@@ -28,9 +28,6 @@ module.exports = function(app) {
   }
 
   var addUsers = function(username) {
-    for(var key in users){
-      if(users[key] == username) return;
-    }
     users.push(username);
     users.sort();
   }
@@ -38,6 +35,10 @@ module.exports = function(app) {
   var removeUsers = function(username) {
     var key = users.indexOf(username);
     users.splice(key, 1);
+  }
+
+  var detectMsg = function() {
+
   }
 
   io.sockets.on('connection', function(socket){
@@ -100,7 +101,7 @@ module.exports = function(app) {
           socket.get('username', function(err, username) {
           //console.log("username username = "+username);
           chat_users.find({"id":username}).run( function (err, docs) {
-              var data = messageData(username, post_time, msg);
+              var data = messageData(username, new Date(), msg);
               // Broadcast the data
               socket.broadcast.emit('msg', data);
               pushBuffer(data);
