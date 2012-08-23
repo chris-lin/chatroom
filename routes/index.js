@@ -63,15 +63,22 @@ exports.create = function ( req, res, next ){
      * is empty then show register page
     */
     
-    
+    // check email format 
     function isEmail(email){
         if (email=="") return false;
             regexp=/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/
         return regexp.test(email);
     };
+    // validate nickname 
+    // only use chinese, English, number  
+    function validateNickname (str) {
+        rule ='^[0-9a-zA-Z\u4e00-\u9fa5]+$'
+        var regexp = new RegExp(rule);
+        return regexp.test( str );
+    };
 
     var params = req.body;
-    if ( !params.email || !params.password || !params.nickname || !isEmail(params.email) ) {
+    if ( !params.email || !params.password || !params.nickname || !isEmail(params.email) ||validateNickname(params.nickname)) {
         res.render( 'create', {
             title : 'OSSII Chat - Create',
         });
