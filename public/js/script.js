@@ -37,9 +37,9 @@
     for(var key in users){
       var user = users[key];
       var html = app.userListTmpl(user);
-      //console.log('html = '+html)
       app.$users.append(html);
     }
+    chris.bindUsersEvents($('.chat-user'));
   }
 
   App.prototype.filterUsers = function(usersList) {
@@ -91,7 +91,7 @@
     var html = app.msgTmpl(data);
     app.$msgs.append(html);
     app.scrolltoBtm();
-    chris.event();
+    chris.bindUsersEvents($('.chat-msg-user:last'));
     return this;
   }
 

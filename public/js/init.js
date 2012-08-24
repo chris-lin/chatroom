@@ -7,8 +7,6 @@
     this.$chat_bd = $('.chat-bd');
     this.$chat_userContainer = $('.chat-userContainer');
     this.$tools = $('.btn-top-tools');
-    this.$msg_user = $('.chat-msg > .chat-msg-user');
-    this.$chat_user = $('.chat-user');
     this.$msg_input = $('.chat-input');
   };
 
@@ -19,21 +17,21 @@
 
   Chris.prototype.adjustScreen = function() {
     var htmlHeight = this.$html.height();
-    var mainBoxHeight = htmlHeight - 80;
+    var mainBoxHeight = htmlHeight - 100;
     var chatBdHeight = mainBoxHeight - 50;
     this.$main_box.height(mainBoxHeight)
     this.$chat_bd.height(chatBdHeight)
     this.$chat_userContainer.height(mainBoxHeight)
   }
 
-  Chris.prototype.event = function() {
-    $('.chat-msg > .chat-msg-user').on("click", this.privateMsg);
-    $('.chat-user').on("click", this.privateMsg);
+  Chris.prototype.bindUsersEvents = function(ele, fun) {
+    ele.on("click", this.privateMsg);
   }
 
   Chris.prototype.privateMsg = function(e) {
+    e.preventDefault();
     var user = this.innerHTML;
-    chris.$msg_input.val("@" + user + " ");
+    chris.$msg_input.val('@' + user + ' ');
     chris.$msg_input.focus();
   }
 
