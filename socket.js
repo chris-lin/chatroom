@@ -1,4 +1,4 @@
-var everyauth = require('everyauth');
+//var everyauth = require('everyauth');
 var mongoose = require( 'mongoose' );
 var db = require('./db');
 var chat_users     = db.chat_users.model( 'chat_users');
