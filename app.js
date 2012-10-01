@@ -4,7 +4,7 @@
 
 var express = require('express')
 //  , stylus = require('stylus')
-  , nib = require('nib');
+//  , nib = require('nib');
 
 var app = module.exports = express.createServer();
 
