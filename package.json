@@ -8,7 +8,7 @@
     "nib": ">= 0.0.1",
     "socket.io": ">= 0.0.1",
     "connect"  : "1.8.7",
-    "mongoose" : "2.6.7",
+    "mongoose" : "5.7.6",
     "mongeese" : "0.0.1"
   },
   "subdomain": "ossii-chat",
