@@ -7,7 +7,7 @@
     "ejs": ">= 0.0.1",
     "nib": ">= 0.0.1",
     "socket.io": ">= 0.0.1",
-    "connect"  : "1.8.7",
+    "connect"  : "3.7.0",
     "mongoose" : "2.6.7",
     "mongeese" : "0.0.1"
   },
